@@ -25,14 +25,14 @@
   .gcard-media{
     aspect-ratio:4/3; position:relative; overflow:hidden;
     background:
-      repeating-linear-gradient(-24deg, #17181b 0 12px, #141518 12px 24px);
+      repeating-linear-gradient(-24deg, #26272c 0 12px, #1e1f24 12px 24px);
     display:flex; align-items:center; justify-content:center;
   }
   .gcard-media svg{ width:56%; height:56%; opacity:.35; }
   .gcard-flag{
     position:absolute; top:12px; left:12px;
     font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
-    padding:5px 10px; background:rgba(10,10,12,.75); border:1px solid var(--line); color:var(--amber);
+    padding:5px 10px; background:rgba(19,19,21,.75); border:1px solid var(--line); color:var(--amber);
   }
   .gcard-note{
     position:absolute; bottom:0; left:0; right:0; padding:10px 12px;
@@ -73,7 +73,7 @@
   .lb-close{
     position:absolute; top:14px; right:14px; z-index:5;
     width:38px; height:38px; display:flex; align-items:center; justify-content:center;
-    background:rgba(10,10,12,.7); border:1px solid var(--line); color:var(--white); cursor:pointer;
+    background:rgba(19,19,21,.7); border:1px solid var(--line); color:var(--white); cursor:pointer;
   }
   .lb-close:hover{ border-color:var(--white); }
   .lb-main{ aspect-ratio:16/10; background:var(--panel-1); overflow:hidden; position:relative; }
@@ -81,9 +81,9 @@
   .lb-arrow{
     position:absolute; top:50%; transform:translateY(-50%); z-index:4;
     width:40px; height:40px; display:flex; align-items:center; justify-content:center;
-    background:rgba(10,10,12,.6); border:1px solid var(--line); color:var(--white); cursor:pointer;
+    background:rgba(19,19,21,.6); border:1px solid var(--line); color:var(--white); cursor:pointer;
   }
-  .lb-arrow:hover{ background:rgba(10,10,12,.85); border-color:var(--white); }
+  .lb-arrow:hover{ background:rgba(19,19,21,.85); border-color:var(--white); }
   .lb-prev{ left:14px; }
   .lb-next{ right:14px; }
   .lb-thumbs{ display:flex; gap:8px; padding:12px; border-bottom:1px solid var(--line); }
@@ -145,10 +145,10 @@
 
     <div class="filter-row reveal">
       <button class="filter-btn is-active" data-filter="all">ทั้งหมด</button>
-      <button class="filter-btn" data-filter="tuning">ECU Tuning</button>
       <button class="filter-btn" data-filter="maintenance">เช็คระยะ</button>
       <button class="filter-btn" data-filter="suspension">ช่วงล่าง</button>
       <button class="filter-btn" data-filter="modify">แต่งรถ</button>
+      <button class="filter-btn" data-filter="tuning">ECU Tuning</button>
     </div>
 
     <div class="gallery" id="gallery">
