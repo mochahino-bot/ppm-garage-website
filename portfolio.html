@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ผลงาน | PPM Garage &amp; ECU Tuning</title>
+<meta name="description" content="ผลงาน PPM Garage งานซ่อมบำรุง ช่วงล่าง ระบบเบรก ล้างไอดี หัวฉีด งานแต่ง และ ECU Tuning">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px;position:sticky;top:76px;z-index:20;padding:12px 0;background:linear-gradient(var(--black) 72%,transparent);}
+  .filter-btn{font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.04em;padding:10px 16px;border:1px solid var(--line);background:var(--panel-2);color:var(--mute);cursor:pointer;transition:.2s;}
+  .filter-btn:hover{color:var(--white);border-color:var(--white)}
+  .filter-btn.is-active{background:var(--red);border-color:var(--red);color:var(--white)}
+  .portfolio-category{margin-bottom:72px;scroll-margin-top:150px}
+  .portfolio-category:last-child{margin-bottom:0}
+  .cat-heading{margin-bottom:26px;display:flex;align-items:end;gap:18px;flex-wrap:wrap}
+  .cat-heading .eyebrow{width:100%}
+  .cat-heading h2{font-size:clamp(24px,3vw,34px)}
+  .cat-heading p{font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--mute-dim);margin:0 0 3px auto}
+  .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .gcard{border:1px solid var(--line);background:var(--panel-2);overflow:hidden;min-width:0}
+  .gcard-clickable{cursor:pointer}
+  .gcard-media{aspect-ratio:4/3;position:relative;overflow:hidden;background:#101114;display:flex;align-items:center;justify-content:center}
+  .gcard-media img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s var(--ease)}
+  .gcard-clickable:hover .gcard-media img{transform:scale(1.025)}
+  .gcard-flag{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.04em;padding:5px 9px;background:rgba(20,20,22,.82);border:1px solid var(--line);color:var(--amber)}
+  .gcard-body{padding:18px 20px 22px}
+  .gcard-body h3{font-size:var(--fs-lg);line-height:1.25}
+  .gcard-body p{margin-top:8px;font-size:var(--fs-md)}
+  .gcard-view{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--mute-dim)}
+  .gcard-view svg{width:13px;height:13px}
+  .gcard-clickable:hover h3{color:var(--amber)}
+
+  .lb-backdrop{position:fixed;inset:0;background:rgba(6,6,7,.9);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:200;padding:24px}
+  .lb-backdrop.open{display:flex}
+  .lb-box{background:var(--panel-2);border:1px solid var(--line);max-width:1040px;width:100%;max-height:92vh;overflow-y:auto;position:relative}
+  .lb-close{position:absolute;top:14px;right:14px;z-index:5;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(20,20,22,.8);border:1px solid var(--line);color:var(--white);cursor:pointer}
+  .lb-main{height:min(64vh,680px);min-height:340px;background:#09090a;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+  .lb-main img{width:100%;height:100%;object-fit:contain;display:block}
+  .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(20,20,22,.7);border:1px solid var(--line);color:var(--white);cursor:pointer}
+  .lb-prev{left:14px} .lb-next{right:14px}
+  .lb-thumbs{display:flex;gap:8px;padding:12px;overflow-x:auto;border-bottom:1px solid var(--line)}
+  .lb-thumb{width:82px;min-width:82px;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);cursor:pointer;opacity:.55;background:#0d0d0f}
+  .lb-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+  .lb-thumb.active{opacity:1;border-color:var(--red)}
+  .lb-info{padding:22px 26px 28px}
+  .lb-info h3{font-size:var(--fs-lg)}
+  .lb-specs{margin-top:9px;font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--amber)}
+  .lb-desc{margin-top:13px;font-size:var(--fs-md);max-width:760px}
+  .empty-state{display:none;border:1px dashed var(--line);padding:36px;text-align:center;color:var(--mute)}
+  @media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.filter-row{top:68px}}
+  @media(max-width:600px){.gallery{grid-template-columns:1fr}.filter-row{position:static}.cat-heading p{margin-left:0;width:100%}.lb-backdrop{padding:8px}.lb-main{height:55vh;min-height:260px}.lb-info{padding:18px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="PPM Garage & ECU Tuning"><span class="brand-text"><b>PPM GARAGE</b><span>&amp; ECU TUNING</span></span></a>
+    <ul class="nav-links" id="navLinks"><li><a href="maintenance.html">เช็คระยะ</a></li><li><a href="modify.html">ปรับแต่ง</a></li><li><a href="portfolio.html" class="active">ผลงาน</a></li><li><a href="articles.html">บทความ</a></li></ul>
+    <div class="nav-cta"><span class="nav-tel">โทร &nbsp;<b>087-025-9092</b></span><a href="contact.html" class="btn btn-primary">จองคิว</a></div>
+    <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </nav>
+</header>
+<section class="page-hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;"><div class="crumb"><b>ผลงาน</b> / แยกตามประเภทงาน</div><div class="eyebrow">WORKS</div><h1>ผลงานที่ผ่านมือทีม<br>PPM Garage</h1><p>งานซ่อมบำรุง ช่วงล่าง เบรก ไอดี งานแต่ง และ ECU Tuning — กดที่แต่ละงานเพื่อดูรูปทั้งหมด</p></div>
+</section>
+<section><div class="wrap">
+  <div class="filter-row reveal">
+    <button class="filter-btn is-active" data-filter="all">ทั้งหมด</button>
+    <button class="filter-btn" data-filter="maintenance">เช็กระยะ / ซ่อมบำรุง</button><button class="filter-btn" data-filter="suspension">ช่วงล่าง / บังคับเลี้ยว</button><button class="filter-btn" data-filter="brakes">ระบบเบรก</button><button class="filter-btn" data-filter="intake">ล้างไอดี / หัวฉีด</button><button class="filter-btn" data-filter="modify">ปรับแต่ง / งานแต่ง</button><button class="filter-btn" data-filter="tuning">ECU Tuning</button>
+  </div>
+  <section class="portfolio-category" data-cat="maintenance">
+      <div class="cat-heading">
+        <span class="eyebrow">เช็กระยะ / ซ่อมบำรุง</span>
+        <h2>เช็กระยะ / ซ่อมบำรุง</h2>
+        <p>2 ผลงาน</p>
+      </div>
+      <div class="gallery"><article class="gcard gcard-clickable reveal" data-cat="maintenance" data-title="เปลี่ยนแท่นเครื่อง" data-specs="แท่นเครื่องเดิมแตกและยุบตัว" data-desc="ตรวจพบแท่นเครื่องชำรุด เปรียบเทียบสภาพอะไหล่เดิมกับอะไหล่ใหม่ และเปลี่ยนชุดแท่นเครื่องใหม่พร้อมติดตั้ง" data-img1="assets/works/engine-mount-old-1.webp" data-alt1="แท่นเครื่องเดิมที่แตกและเสื่อม" data-img2="assets/works/engine-mount-old-2.webp" data-alt2="ภาพใกล้จุดเสียหายของแท่นเครื่องเดิม" data-img3="assets/works/engine-mount-old-vs-new.webp" data-alt3="เปรียบเทียบแท่นเครื่องเก่ากับใหม่" data-img4="assets/works/engine-mount-new-parts.webp" data-alt4="ชุดแท่นเครื่องใหม่ก่อนติดตั้ง" data-img5="assets/works/engine-mount-new-installed.webp" data-alt5="แท่นเครื่องใหม่หลังติดตั้งบนรถ">
+      <div class="gcard-media">
+        <span class="gcard-flag">ซ่อมบำรุง</span>
+        <img src="assets/works/engine-mount-old-1.webp" alt="แท่นเครื่องเดิมที่แตกและเสื่อม" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>เปลี่ยนแท่นเครื่อง</h3>
+        <p>แท่นเครื่องเดิมแตกและยุบตัว</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 5 รูป</span>
+      </div>
+    </article><article class="gcard gcard-clickable reveal" data-cat="maintenance" data-title="เปลี่ยนน้ำมันเกียร์ + กรองเกียร์" data-specs="เซอร์วิสน้ำมันเกียร์และกรองเกียร์" data-desc="ถ่ายน้ำมันเกียร์เดิม เปลี่ยนกรองเกียร์ และเติมน้ำมันเกียร์ใหม่ตามสเปก พร้อมตรวจสภาพชิ้นส่วนก่อนประกอบกลับ" data-img1="assets/works/atf-drain.webp" data-alt1="ถ่ายน้ำมันเกียร์เดิมออก" data-img2="assets/works/transmission-filter-old-new.webp" data-alt2="กรองเกียร์เก่าเทียบกับกรองเกียร์ใหม่" data-img3="assets/works/atf-and-filter-new.webp" data-alt3="น้ำมันเกียร์และกรองเกียร์ใหม่ก่อนติดตั้ง">
+      <div class="gcard-media">
+        <span class="gcard-flag">ซ่อมบำรุง</span>
+        <img src="assets/works/atf-drain.webp" alt="ถ่ายน้ำมันเกียร์เดิมออก" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>เปลี่ยนน้ำมันเกียร์ + กรองเกียร์</h3>
+        <p>เซอร์วิสน้ำมันเกียร์และกรองเกียร์</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
+      </div>
+    </article></div>
+    </section><section class="portfolio-category" data-cat="suspension">
+      <div class="cat-heading">
+        <span class="eyebrow">ช่วงล่าง / บังคับเลี้ยว</span>
+        <h2>ช่วงล่าง / บังคับเลี้ยว</h2>
+        <p>2 ผลงาน</p>
+      </div>
+      <div class="gallery"><article class="gcard gcard-clickable reveal" data-cat="suspension" data-title="เปลี่ยนปีกนกหน้า" data-specs="เปรียบเทียบอะไหล่เก่ากับใหม่ก่อนประกอบ" data-desc="ตรวจเช็กช่วงล่างและเปลี่ยนปีกนกหน้า พร้อมเปรียบเทียบสภาพอะไหล่เดิมกับอะไหล่ใหม่ก่อนติดตั้ง" data-img1="assets/works/control-arm-old-vs-new-1.webp" data-alt1="ปีกนกเก่าเทียบกับปีกนกใหม่" data-img2="assets/works/control-arm-new-pair.webp" data-alt2="ปีกนกใหม่ซ้ายขวาพร้อมอะไหล่" data-img3="assets/works/control-arm-old-vs-new-2.webp" data-alt3="ปีกนกเก่าและใหม่อีกมุม">
+      <div class="gcard-media">
+        <span class="gcard-flag">ช่วงล่าง</span>
+        <img src="assets/works/control-arm-old-vs-new-1.webp" alt="ปีกนกเก่าเทียบกับปีกนกใหม่" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>เปลี่ยนปีกนกหน้า</h3>
+        <p>เปรียบเทียบอะไหล่เก่ากับใหม่ก่อนประกอบ</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
+      </div>
+    </article><article class="gcard gcard-clickable reveal" data-cat="suspension" data-title="เปลี่ยนแร็คพวงมาลัย" data-specs="เปรียบเทียบแร็คเก่าและใหม่ก่อนติดตั้ง" data-desc="ถอดชุดแร็คพวงมาลัยเดิม เปรียบเทียบกับอะไหล่ใหม่ และประกอบแร็คใหม่กลับเข้าชุดซับเฟรมหน้า" data-img1="assets/works/steering-rack-old-subframe.webp" data-alt1="ชุดซับเฟรมและแร็คพวงมาลัยเดิม" data-img2="assets/works/steering-rack-old-close.webp" data-alt2="ภาพใกล้แร็คพวงมาลัยเดิม" data-img3="assets/works/steering-rack-old-vs-new.webp" data-alt3="เปรียบเทียบแร็คพวงมาลัยเก่ากับใหม่" data-img4="assets/works/steering-rack-new-installed.webp" data-alt4="แร็คพวงมาลัยใหม่ติดตั้งบนซับเฟรม">
+      <div class="gcard-media">
+        <span class="gcard-flag">ระบบบังคับเลี้ยว</span>
+        <img src="assets/works/steering-rack-old-subframe.webp" alt="ชุดซับเฟรมและแร็คพวงมาลัยเดิม" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>เปลี่ยนแร็คพวงมาลัย</h3>
+        <p>เปรียบเทียบแร็คเก่าและใหม่ก่อนติดตั้ง</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 4 รูป</span>
+      </div>
+    </article></div>
+    </section><section class="portfolio-category" data-cat="brakes">
+      <div class="cat-heading">
+        <span class="eyebrow">ระบบเบรก</span>
+        <h2>ระบบเบรก</h2>
+        <p>1 ผลงาน</p>
+      </div>
+      <div class="gallery"><article class="gcard gcard-clickable reveal" data-cat="brakes" data-title="เปลี่ยนผ้าเบรก + เจียรจานเบรก" data-specs="ตรวจวัดจานเบรก · เปลี่ยนผ้าเบรก" data-desc="ตรวจเช็กสภาพจานเบรก วัดความหนาและความเรียบของจาน เจียรผิวจาน และเปลี่ยนผ้าเบรกใหม่ก่อนประกอบกลับ" data-img1="assets/works/brake-disc-dial-gauge.webp" data-alt1="ตรวจจานเบรกด้วยไดอัลเกจ" data-img2="assets/works/brake-pad-old-vs-new.webp" data-alt2="ผ้าเบรกเดิมเปรียบเทียบกับผ้าเบรกใหม่" data-img3="assets/works/brake-disc-thickness.webp" data-alt3="วัดความหนาจานเบรก" data-img4="assets/works/brake-pad-installed.webp" data-alt4="ผ้าเบรกใหม่หลังติดตั้ง">
+      <div class="gcard-media">
+        <span class="gcard-flag">ระบบเบรก</span>
+        <img src="assets/works/brake-disc-dial-gauge.webp" alt="ตรวจจานเบรกด้วยไดอัลเกจ" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>เปลี่ยนผ้าเบรก + เจียรจานเบรก</h3>
+        <p>ตรวจวัดจานเบรก · เปลี่ยนผ้าเบรก</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 4 รูป</span>
+      </div>
+    </article></div>
+    </section><section class="portfolio-category" data-cat="intake">
+      <div class="cat-heading">
+        <span class="eyebrow">ล้างไอดี / หัวฉีด</span>
+        <h2>ล้างไอดี / หัวฉีด</h2>
+        <p>1 ผลงาน</p>
+      </div>
+      <div class="gallery"><article class="gcard gcard-clickable reveal" data-cat="intake" data-title="ล้างท่อร่วมไอดี + ล้างและทดสอบหัวฉีด" data-specs="ทำความสะอาดระบบไอดี · ทดสอบปริมาณการจ่ายหัวฉีด" data-desc="ถอดทำความสะอาดท่อร่วมและช่องไอดี พร้อมล้างและทดสอบปริมาณการจ่ายหัวฉีดแต่ละหัวก่อนประกอบกลับ" data-img1="assets/works/intake-manifold-removed.webp" data-alt1="ถอดท่อร่วมไอดีออกเพื่อทำความสะอาด" data-img2="assets/works/intake-port-clean.webp" data-alt2="สภาพช่องไอดีหลังทำความสะอาด" data-img3="assets/works/injectors-before-clean.webp" data-alt3="สภาพหัวฉีดก่อนล้าง" data-img4="assets/works/injectors-cleaned.webp" data-alt4="หัวฉีดหลังทำความสะอาด" data-img5="assets/works/injector-flow-test.webp" data-alt5="ทดสอบปริมาณการจ่ายหัวฉีดแต่ละหัว">
+      <div class="gcard-media">
+        <span class="gcard-flag">ไอดี / หัวฉีด</span>
+        <img src="assets/works/intake-manifold-removed.webp" alt="ถอดท่อร่วมไอดีออกเพื่อทำความสะอาด" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>ล้างท่อร่วมไอดี + ล้างและทดสอบหัวฉีด</h3>
+        <p>ทำความสะอาดระบบไอดี · ทดสอบปริมาณการจ่ายหัวฉีด</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 5 รูป</span>
+      </div>
+    </article></div>
+    </section><section class="portfolio-category" data-cat="modify">
+      <div class="cat-heading">
+        <span class="eyebrow">ปรับแต่ง / งานแต่ง</span>
+        <h2>ปรับแต่ง / งานแต่ง</h2>
+        <p>1 ผลงาน</p>
+      </div>
+      <div class="gallery"><article class="gcard gcard-clickable reveal" data-cat="modify" data-title="ติดตั้งแผ่นใต้ท้อง" data-specs="แผ่นใต้ท้อง PPM" data-desc="ติดตั้งแผ่นใต้ท้องเพื่อช่วยปกป้องชิ้นส่วนใต้ห้องเครื่องและเพิ่มความเรียบร้อยของใต้ท้องรถ" data-img1="assets/works/skid-plate-before.webp" data-alt1="แผ่นใต้ท้องก่อนติดตั้ง" data-img2="assets/works/skid-plate-installed.webp" data-alt2="แผ่นใต้ท้องหลังติดตั้งใต้รถ">
+      <div class="gcard-media">
+        <span class="gcard-flag">งานแต่ง</span>
+        <img src="assets/works/skid-plate-before.webp" alt="แผ่นใต้ท้องก่อนติดตั้ง" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>ติดตั้งแผ่นใต้ท้อง</h3>
+        <p>แผ่นใต้ท้อง PPM</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 2 รูป</span>
+      </div>
+    </article></div>
+    </section><section class="portfolio-category" data-cat="tuning">
+      <div class="cat-heading">
+        <span class="eyebrow">ECU Tuning</span>
+        <h2>ECU Tuning</h2>
+        <p>3 ผลงาน</p>
+      </div>
+      <div class="gallery"><article class="gcard gcard-clickable reveal" data-cat="tuning" data-title="Mazda 3 BN — Remap E85" data-specs="182 WHP · แรงบิด 225 Nm (วัดที่ล้อ) · E85" data-desc="รีแมพกล่อง ECU พร้อมปรับจูนให้เข้ากับน้ำมัน E85 และวัดผลจริงบนไดโน่" data-img1="assets/work-mazda3bn-182whp.jpg" data-alt1="Mazda 3 BN รีแมพ E85" data-img2="assets/work-mazda3bn-182whp-engine.jpg" data-alt2="ห้องเครื่อง Mazda 3 BN" data-img3="assets/work-mazda3bn-182whp-dyno.jpg" data-alt3="กราฟไดโน่ Mazda 3 BN">
+      <div class="gcard-media">
+        <span class="gcard-flag">ECU TUNING</span>
+        <img src="assets/work-mazda3bn-182whp.jpg" alt="Mazda 3 BN รีแมพ E85" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>Mazda 3 BN — Remap E85</h3>
+        <p>182 WHP · แรงบิด 225 Nm (วัดที่ล้อ) · E85</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
+      </div>
+    </article><article class="gcard gcard-clickable reveal" data-cat="tuning" data-title="Mazda 2 1.3 — Remap E20" data-specs="90 WHP · แรงบิด 117 Nm (วัดที่ล้อ) · E20" data-desc="รีแมพกล่อง ECU Mazda 2 1.3 เติม E20 พร้อมวัดผลบนไดโน่" data-img1="assets/work-mazda2-white-90whp.jpg" data-alt1="Mazda 2 สีขาวรีแมพ E20" data-img2="assets/work-mazda2-white-90whp-flame.jpg" data-alt2="Mazda 2 สีขาวทดสอบบนไดโน่" data-img3="assets/work-mazda2-white-90whp-dyno.jpg" data-alt3="กราฟไดโน่ Mazda 2 สีขาว">
+      <div class="gcard-media">
+        <span class="gcard-flag">ECU TUNING</span>
+        <img src="assets/work-mazda2-white-90whp.jpg" alt="Mazda 2 สีขาวรีแมพ E20" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>Mazda 2 1.3 — Remap E20</h3>
+        <p>90 WHP · แรงบิด 117 Nm (วัดที่ล้อ) · E20</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
+      </div>
+    </article><article class="gcard gcard-clickable reveal" data-cat="tuning" data-title="Mazda 2 1.3 — Remap E20" data-specs="86 WHP · แรงบิด 116 Nm (วัดที่ล้อ) · E20" data-desc="รีแมพกล่อง ECU Mazda 2 1.3 สีแดง เติม E20 พร้อมวัดผลบนไดโน่" data-img1="assets/work-mazda2-red-86whp.jpg" data-alt1="Mazda 2 สีแดงรีแมพ E20" data-img2="assets/work-mazda2-red-86whp-engine.jpg" data-alt2="ห้องเครื่อง Mazda 2 สีแดง" data-img3="assets/work-mazda2-red-86whp-dyno.jpg" data-alt3="กราฟไดโน่ Mazda 2 สีแดง">
+      <div class="gcard-media">
+        <span class="gcard-flag">ECU TUNING</span>
+        <img src="assets/work-mazda2-red-86whp.jpg" alt="Mazda 2 สีแดงรีแมพ E20" loading="lazy">
+      </div>
+      <div class="gcard-body">
+        <h3>Mazda 2 1.3 — Remap E20</h3>
+        <p>86 WHP · แรงบิด 116 Nm (วัดที่ล้อ) · E20</p>
+        <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
+      </div>
+    </article></div>
+    </section>
+</div></section>
+<div class="cta-band"><div class="wrap cta-inner"><h2>อยากให้รถของคุณเป็นผลงานคันต่อไป?</h2><div style="display:flex;gap:14px;flex-wrap:wrap;"><a href="contact.html" class="btn btn-ghost">ติดต่อร้าน</a><a href="tel:0870259092" class="btn" style="background:#161300;color:var(--white);">โทร 087-025-9092</a></div></div></div>
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div><a href="index.html" class="brand" style="margin-bottom:16px;"><img src="assets/logo.png" alt="PPM Garage & ECU Tuning" style="height:38px;"></a><p style="max-width:320px;">อู่รถที่นนทบุรี รับเช็คระยะ ปรับจูน ECU ปรับตั้งช่วงล่าง และแต่งรถ</p></div><div><h5>เมนู</h5><a href="index.html">หน้าแรก</a><a href="maintenance.html">เช็คระยะ</a><a href="modify.html">ปรับแต่ง</a><a href="portfolio.html">ผลงาน</a><a href="articles.html">บทความ</a><a href="contact.html">ติดต่อ</a></div><div><h5>ติดต่อร้าน</h5><a href="tel:0870259092">087-025-9092</a><a href="https://www.facebook.com/PPMGarageAndEcuTuning/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/ppm.garage/" target="_blank" rel="noopener">Instagram @ppm.garage</a><p>แถวสะพานพระราม 5 นนทบุรี</p></div></div><div class="footer-bottom"><span>&copy; <span data-year></span> PPM Garage &amp; ECU Tuning</span><span>PPM GARAGE — NONTHABURI, THAILAND</span></div></div></footer>
+<div class="lb-backdrop" id="lbBackdrop"><div class="lb-box" role="dialog" aria-modal="true" aria-labelledby="lbTitle"><button class="lb-close" id="lbClose" aria-label="ปิด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="lb-main"><img id="lbMainImg" src="" alt=""><button class="lb-arrow lb-prev" id="lbPrev" aria-label="รูปก่อนหน้า"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button><button class="lb-arrow lb-next" id="lbNext" aria-label="รูปถัดไป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="lb-thumbs" id="lbThumbs"></div><div class="lb-info"><h3 id="lbTitle"></h3><div class="lb-specs" id="lbSpecs"></div><p class="lb-desc" id="lbDesc"></p></div></div></div>
+<script src="assets/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var buttons=document.querySelectorAll('.filter-btn');
+  var categories=document.querySelectorAll('.portfolio-category');
+  buttons.forEach(function(btn){btn.addEventListener('click',function(){buttons.forEach(function(b){b.classList.remove('is-active')});btn.classList.add('is-active');var f=btn.dataset.filter;categories.forEach(function(cat){cat.style.display=(f==='all'||cat.dataset.cat===f)?'':'none'});});});
+
+  var backdrop=document.getElementById('lbBackdrop'),mainImg=document.getElementById('lbMainImg'),thumbs=document.getElementById('lbThumbs'),titleEl=document.getElementById('lbTitle'),specsEl=document.getElementById('lbSpecs'),descEl=document.getElementById('lbDesc'),prevBtn=document.getElementById('lbPrev'),nextBtn=document.getElementById('lbNext'),closeBtn=document.getElementById('lbClose');
+  var currentImages=[],currentIndex=0;
+  function renderImage(i){if(!currentImages.length)return;currentIndex=(i+currentImages.length)%currentImages.length;mainImg.src=currentImages[currentIndex].src;mainImg.alt=currentImages[currentIndex].alt;thumbs.querySelectorAll('.lb-thumb').forEach(function(t,idx){t.classList.toggle('active',idx===currentIndex)});}
+  function openLightbox(card){var imgs=[];for(var n=1;n<=8;n++){var src=card.getAttribute('data-img'+n);if(src)imgs.push({src:src,alt:card.getAttribute('data-alt'+n)||''})}if(!imgs.length)return;currentImages=imgs;titleEl.textContent=card.dataset.title||'';specsEl.textContent=card.dataset.specs||'';descEl.textContent=card.dataset.desc||'';thumbs.innerHTML='';imgs.forEach(function(o,idx){var t=document.createElement('div');t.className='lb-thumb';var im=document.createElement('img');im.src=o.src;im.alt=o.alt;t.appendChild(im);t.addEventListener('click',function(){renderImage(idx)});thumbs.appendChild(t);});renderImage(0);prevBtn.style.display=imgs.length>1?'flex':'none';nextBtn.style.display=imgs.length>1?'flex':'none';backdrop.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLightbox(){backdrop.classList.remove('open');document.body.style.overflow='';mainImg.src='';}
+  document.querySelectorAll('.gcard-clickable').forEach(function(card){card.addEventListener('click',function(){openLightbox(card)})});
+  closeBtn.addEventListener('click',closeLightbox);backdrop.addEventListener('click',function(e){if(e.target===backdrop)closeLightbox()});prevBtn.addEventListener('click',function(){renderImage(currentIndex-1)});nextBtn.addEventListener('click',function(){renderImage(currentIndex+1)});document.addEventListener('keydown',function(e){if(!backdrop.classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')renderImage(currentIndex-1);if(e.key==='ArrowRight')renderImage(currentIndex+1);});
+});
+</script>
+</body></html>
