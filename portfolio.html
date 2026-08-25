@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ผลงาน | PPM Garage &amp; ECU Tuning</title>
-<meta name="description" content="ตัวอย่างผลงานจาก PPM Garage & ECU Tuning: งานจูน ECU เช็คระยะ ปรับช่วงล่าง และแต่งรถมาสด้า">
+<meta name="description" content="ตัวอย่างผลงานจาก PPM Garage & ECU Tuning: งานจูน ECU เช็คระยะ ปรับช่วงล่าง และแต่งรถมาสด้า แบ่งตามประเภทงานและรุ่นรถ">
 <link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-  .filter-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px; }
+  .filter-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:48px; }
   .filter-btn{
     font-family:var(--font-mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
     padding:10px 18px; border:1px solid var(--line); background:transparent; color:var(--mute); cursor:pointer;
@@ -16,6 +16,20 @@
   }
   .filter-btn:hover{ color:var(--white); border-color:var(--white); }
   .filter-btn.is-active{ background:var(--red); border-color:var(--red); color:var(--white); }
+
+  .portfolio-category{ margin-bottom:64px; }
+  .portfolio-category:last-child{ margin-bottom:0; }
+  .cat-heading{ margin-bottom:32px; }
+  .cat-heading h2{ font-size:clamp(24px,3vw,32px); margin-top:10px; }
+
+  .model-group{ margin-bottom:36px; }
+  .model-group:last-child{ margin-bottom:0; }
+  .model-heading{
+    font-family:var(--font-mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--mute-dim); padding-bottom:10px; margin-bottom:20px; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:10px;
+  }
+  .model-heading::before{ content:''; width:16px; height:2px; background:var(--red); transform:skewX(-18deg); display:inline-block; }
 
   .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
   @media (max-width:900px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
@@ -108,11 +122,10 @@
       <span class="brand-text"><b>PPM GARAGE</b><span>&amp; ECU TUNING</span></span>
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">หน้าแรก</a></li>
-      <li><a href="services.html">บริการ</a></li>
+      <li><a href="maintenance.html">เช็คระยะ</a></li>
+      <li><a href="modify.html">ปรับแต่ง</a></li>
       <li><a href="portfolio.html" class="active">ผลงาน</a></li>
-      <li><a href="parts.html">อะไหล่แต่งรถ</a></li>
-      <li><a href="contact.html">ติดต่อ</a></li>
+      <li><a href="articles.html">บทความ</a></li>
     </ul>
     <div class="nav-cta">
       <span class="nav-tel">โทร &nbsp;<b>087-025-9092</b></span>
@@ -127,10 +140,10 @@
 <section class="page-hero">
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="wrap" style="position:relative;">
-    <div class="crumb"><b>ผลงาน</b> / ตัวอย่างงานที่ผ่านมา</div>
+    <div class="crumb"><b>ผลงาน</b> / แบ่งตามประเภทงานและรุ่นรถ</div>
     <div class="eyebrow">WORKS</div>
     <h1>ผลงานที่ผ่านมือทีม<br>PPM Garage</h1>
-    <p>ตัวอย่างงานจูน เช็คระยะ ปรับช่วงล่าง และแต่งรถมาสด้า คัดมาให้ดูเป็นแนวทาง</p>
+    <p>เลือกดูตามประเภทงาน แล้วไล่ดูต่อตามรุ่นรถที่สนใจได้เลย</p>
   </div>
 </section>
 
@@ -139,8 +152,8 @@
 
     <div class="upload-note reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8" cy="9" r="1.2"/></svg>
-      <p><b style="color:var(--white);">หมายเหตุสำหรับเจ้าของร้าน:</b> ช่องด้านล่างนี้เป็นเลย์เอาต์ตัวอย่างสำหรับใส่รูปผลงานจริง
-      แค่นำไฟล์รูปไปวางในโฟลเดอร์ <code style="color:var(--amber);">assets/</code> แล้วแก้ path ใน <code style="color:var(--amber);">&lt;img&gt;</code> ของแต่ละการ์ดแทนกราฟิกตัวอย่างนี้ได้เลย</p>
+      <p><b style="color:var(--white);">หมายเหตุสำหรับเจ้าของร้าน:</b> การ์ดที่ยังเป็นเลย์เอาต์ตัวอย่างรอรูปผลงานจริง
+      แค่ส่งรูปมาให้ทีมทำเว็บใส่แทนได้เลย</p>
     </div>
 
     <div class="filter-row reveal">
@@ -151,27 +164,135 @@
       <button class="filter-btn" data-filter="tuning">ECU Tuning</button>
     </div>
 
-    <div class="gallery" id="gallery">
-
-      <div class="gcard gcard-clickable reveal" data-cat="tuning"
-        data-title="Mazda 3 BN — Remap E85"
-        data-specs="182 WHP · แรงบิด 225 Nm (วัดที่ล้อ) · เชื้อเพลิง E85"
-        data-desc="รีแมพกล่อง ECU พร้อมปรับจูนให้เข้ากับน้ำมัน E85 วัดผลจริงบนไดโน่ที่หน้าร้าน ได้แรงม้าสูงสุด 182 ตัวที่ล้อ แรงบิดสูงสุด 225 นิวตันเมตร การขับขี่ลื่นไหลตลอดช่วงรอบ"
-        data-img1="assets/work-mazda3bn-182whp.jpg" data-alt1="Mazda 3 BN บนแท่นไดโน่หลังรีแมพ E85"
-        data-img2="assets/work-mazda3bn-182whp-engine.jpg" data-alt2="ห้องเครื่อง Mazda 3 BN พร้อมชุดกรองอากาศ"
-        data-img3="assets/work-mazda3bn-182whp-dyno.jpg" data-alt3="กราฟไดโน่ Mazda 3 BN แรงม้า 182 WHP แรงบิด 225 Nm">
-        <div class="gcard-media" style="background:none;">
-          <span class="gcard-flag">ECU TUNING</span>
-          <img src="assets/work-mazda3bn-182whp.jpg" alt="Mazda 3 BN รีแมพ E85 วัดแรงม้าได้ 182 WHP แรงบิด 225 Nm ที่ PPM Garage" style="width:100%; height:100%; object-fit:cover;">
+    <div class="portfolio-category" id="cat-maintenance" data-cat="maintenance">
+      <div class="cat-heading">
+        <span class="eyebrow">เช็คระยะ & บำรุงรักษา</span>
+        <h2>เช็คระยะ & บำรุงรักษา</h2>
+      </div>
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 2</h3>
+        <div class="gallery">
+<div class="gcard reveal" data-cat="maintenance">
+        <div class="gcard-media">
+          <span class="gcard-flag">MAINTENANCE</span>
+          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/><path d="M46 12v8M50 12v8M54 12v8"/></svg>
+          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
         </div>
         <div class="gcard-body">
-          <h3>Mazda 3 BN — Remap E85</h3>
-          <p>182 WHP · แรงบิด 225 Nm (วัดที่ล้อ)</p>
-          <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
+          <h3>Mazda 2 — เช็คระยะ 100,000 กม.</h3>
+          <p>เช็คระยะใหญ่พร้อมเปลี่ยนถ่ายของเหลวและตรวจระบบแอร์</p>
+        </div>
+      </div>
         </div>
       </div>
 
-      <div class="gcard gcard-clickable reveal" data-cat="tuning"
+      <div class="model-group">
+        <h3 class="model-heading">Mazda CX-5</h3>
+        <div class="gallery">
+<div class="gcard reveal" data-cat="maintenance">
+        <div class="gcard-media">
+          <span class="gcard-flag">MAINTENANCE</span>
+          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
+          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
+        </div>
+        <div class="gcard-body">
+          <h3>Mazda CX-5 — เช็คระยะประจำปี</h3>
+          <p>ตรวจเช็คตามรอบพร้อมบันทึกประวัติการเข้ารับบริการ</p>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-category" id="cat-suspension" data-cat="suspension">
+      <div class="cat-heading">
+        <span class="eyebrow">ช่วงล่าง</span>
+        <h2>ช่วงล่าง</h2>
+      </div>
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 2</h3>
+        <div class="gallery">
+<div class="gcard reveal" data-cat="suspension">
+        <div class="gcard-media">
+          <span class="gcard-flag">SUSPENSION</span>
+          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--red)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
+          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
+        </div>
+        <div class="gcard-body">
+          <h3>Mazda2 — แก้อาการดึงซ้าย/ขวา</h3>
+          <p>ตรวจวินิจฉัยและตั้งศูนย์ล้อใหม่ทั้งคัน</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 3</h3>
+        <div class="gallery">
+<div class="gcard reveal" data-cat="suspension">
+        <div class="gcard-media">
+          <span class="gcard-flag">SUSPENSION</span>
+          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--red)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/><path d="M26 41v-14M70 41v-14" stroke-dasharray="2 3"/></svg>
+          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
+        </div>
+        <div class="gcard-body">
+          <h3>Mazda 3 — ตั้งมุมล้อ &amp; โช้ค</h3>
+          <p>ปรับตั้งมุมล้อและโช้คอัพให้เข้าโค้งนิ่งขึ้น</p>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-category" id="cat-modify" data-cat="modify">
+      <div class="cat-heading">
+        <span class="eyebrow">แต่งรถ</span>
+        <h2>แต่งรถ</h2>
+      </div>
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 2</h3>
+        <div class="gallery">
+<div class="gcard reveal" data-cat="modify">
+        <div class="gcard-media">
+          <span class="gcard-flag">MODIFY</span>
+          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40M64 20l10-6"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
+          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
+        </div>
+        <div class="gcard-body">
+          <h3>Mazda 2 — เฮดเดอร์ &amp; ลิ้นขยาย</h3>
+          <p>ติดตั้งเฮดเดอร์และลิ้นขยาย พร้อมตรวจเช็คหลังติดตั้ง</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 3</h3>
+        <div class="gallery">
+<div class="gcard reveal" data-cat="modify">
+        <div class="gcard-media">
+          <span class="gcard-flag">MODIFY</span>
+          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40M30 20l-10-4" /><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
+          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
+        </div>
+        <div class="gcard-body">
+          <h3>Mazda 3 — สปอยเลอร์กลาง</h3>
+          <p>ติดตั้งสปอยเลอร์กลางพร้อมชุดแต่งภายนอก</p>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-category" id="cat-tuning" data-cat="tuning">
+      <div class="cat-heading">
+        <span class="eyebrow">ECU TUNING</span>
+        <h2>ECU Tuning</h2>
+      </div>
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 2</h3>
+        <div class="gallery">
+<div class="gcard gcard-clickable reveal" data-cat="tuning"
         data-title="Mazda 2 1.3 — Remap E20"
         data-specs="90 WHP · แรงบิด 117 Nm (วัดที่ล้อ) · เชื้อเพลิง E20"
         data-desc="รีแมพกล่อง ECU สีขาว 1.3 เติม E20 แรงม้าเดิมวัดได้ 80.7 PS แรงบิด 109.7 Nm หลังจูนขึ้นเป็น 90 WHP แรงบิด 117 Nm ขับดีขึ้นทั้งช่วงออกตัวและรอบปลาย"
@@ -189,7 +310,7 @@
         </div>
       </div>
 
-      <div class="gcard gcard-clickable reveal" data-cat="tuning"
+<div class="gcard gcard-clickable reveal" data-cat="tuning"
         data-title="Mazda 2 1.3 — Remap E20"
         data-specs="86 WHP · แรงบิด 116 Nm (วัดที่ล้อ) · เชื้อเพลิง E20"
         data-desc="รีแมพกล่อง ECU สีแดง 1.3 เติม E20 แรงม้าเดิมวัดได้ 78.8 PS แรงบิด 109.9 Nm หลังจูนขึ้นเป็น 86 WHP แรงบิด 116 Nm คันเร่งตอบสนองไวขึ้นตั้งแต่รอบต่ำ"
@@ -206,80 +327,33 @@
           <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
         </div>
       </div>
-
-      <div class="gcard reveal" data-cat="modify">
-        <div class="gcard-media">
-          <span class="gcard-flag">MODIFY</span>
-          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40M64 20l10-6"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
-          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
-        </div>
-        <div class="gcard-body">
-          <h3>Mazda 2 — เฮดเดอร์ &amp; ลิ้นขยาย</h3>
-          <p>ติดตั้งเฮดเดอร์และลิ้นขยาย พร้อมตรวจเช็คหลังติดตั้ง</p>
         </div>
       </div>
 
-      <div class="gcard reveal" data-cat="suspension">
-        <div class="gcard-media">
-          <span class="gcard-flag">SUSPENSION</span>
-          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--red)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/><path d="M26 41v-14M70 41v-14" stroke-dasharray="2 3"/></svg>
-          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
+      <div class="model-group">
+        <h3 class="model-heading">Mazda 3</h3>
+        <div class="gallery">
+<div class="gcard gcard-clickable reveal" data-cat="tuning"
+        data-title="Mazda 3 BN — Remap E85"
+        data-specs="182 WHP · แรงบิด 225 Nm (วัดที่ล้อ) · เชื้อเพลิง E85"
+        data-desc="รีแมพกล่อง ECU พร้อมปรับจูนให้เข้ากับน้ำมัน E85 วัดผลจริงบนไดโน่ที่หน้าร้าน ได้แรงม้าสูงสุด 182 ตัวที่ล้อ แรงบิดสูงสุด 225 นิวตันเมตร การขับขี่ลื่นไหลตลอดช่วงรอบ"
+        data-img1="assets/work-mazda3bn-182whp.jpg" data-alt1="Mazda 3 BN บนแท่นไดโน่หลังรีแมพ E85"
+        data-img2="assets/work-mazda3bn-182whp-engine.jpg" data-alt2="ห้องเครื่อง Mazda 3 BN พร้อมชุดกรองอากาศ"
+        data-img3="assets/work-mazda3bn-182whp-dyno.jpg" data-alt3="กราฟไดโน่ Mazda 3 BN แรงม้า 182 WHP แรงบิด 225 Nm">
+        <div class="gcard-media" style="background:none;">
+          <span class="gcard-flag">ECU TUNING</span>
+          <img src="assets/work-mazda3bn-182whp.jpg" alt="Mazda 3 BN รีแมพ E85 วัดแรงม้าได้ 182 WHP แรงบิด 225 Nm ที่ PPM Garage" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="gcard-body">
-          <h3>Mazda 3 — ตั้งมุมล้อ &amp; โช้ค</h3>
-          <p>ปรับตั้งมุมล้อและโช้คอัพให้เข้าโค้งนิ่งขึ้น</p>
+          <h3>Mazda 3 BN — Remap E85</h3>
+          <p>182 WHP · แรงบิด 225 Nm (วัดที่ล้อ)</p>
+          <span class="gcard-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>ดูรายละเอียด 3 รูป</span>
         </div>
       </div>
-
-      <div class="gcard reveal" data-cat="maintenance">
-        <div class="gcard-media">
-          <span class="gcard-flag">MAINTENANCE</span>
-          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/><path d="M46 12v8M50 12v8M54 12v8"/></svg>
-          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
-        </div>
-        <div class="gcard-body">
-          <h3>Mazda 2 — เช็คระยะ 100,000 กม.</h3>
-          <p>เช็คระยะใหญ่พร้อมเปลี่ยนถ่ายของเหลวและตรวจระบบแอร์</p>
         </div>
       </div>
-
-      <div class="gcard reveal" data-cat="modify">
-        <div class="gcard-media">
-          <span class="gcard-flag">MODIFY</span>
-          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40M30 20l-10-4" /><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
-          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
-        </div>
-        <div class="gcard-body">
-          <h3>Mazda 3 — สปอยเลอร์กลาง</h3>
-          <p>ติดตั้งสปอยเลอร์กลางพร้อมชุดแต่งภายนอก</p>
-        </div>
-      </div>
-
-      <div class="gcard reveal" data-cat="suspension">
-        <div class="gcard-media">
-          <span class="gcard-flag">SUSPENSION</span>
-          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--red)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
-          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
-        </div>
-        <div class="gcard-body">
-          <h3>Mazda2 — แก้อาการดึงซ้าย/ขวา</h3>
-          <p>ตรวจวินิจฉัยและตั้งศูนย์ล้อใหม่ทั้งคัน</p>
-        </div>
-      </div>
-
-      <div class="gcard reveal" data-cat="maintenance">
-        <div class="gcard-media">
-          <span class="gcard-flag">MAINTENANCE</span>
-          <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M8 40h84M18 40L18 34L26 34L33 22L59 22L67 34L82 34L82 40"/><circle cx="26" cy="46" r="5"/><circle cx="70" cy="46" r="5"/></svg>
-          <span class="gcard-note">ตัวอย่างเลย์เอาต์ — แทนที่ด้วยรูปจริง</span>
-        </div>
-        <div class="gcard-body">
-          <h3>Mazda CX-5 — เช็คระยะประจำปี</h3>
-          <p>ตรวจเช็คตามรอบพร้อมบันทึกประวัติการเข้ารับบริการ</p>
-        </div>
-      </div>
-
     </div>
+
   </div>
 </section>
 
@@ -305,9 +379,10 @@
       <div>
         <h5>เมนู</h5>
         <a href="index.html">หน้าแรก</a>
-        <a href="services.html">บริการ</a>
+        <a href="maintenance.html">เช็คระยะ</a>
+        <a href="modify.html">ปรับแต่ง</a>
         <a href="portfolio.html">ผลงาน</a>
-        <a href="parts.html">อะไหล่แต่งรถ</a>
+        <a href="articles.html">บทความ</a>
         <a href="contact.html">ติดต่อ</a>
       </div>
       <div>
@@ -351,18 +426,18 @@
 
 <script src="assets/main.js"></script>
 <script>
-  // Gallery filter
+  // Category filter — toggles whole category blocks (each already grouped by model)
   document.addEventListener('DOMContentLoaded', function(){
     var buttons = document.querySelectorAll('.filter-btn');
-    var cards = document.querySelectorAll('#gallery .gcard');
+    var categories = document.querySelectorAll('.portfolio-category');
     buttons.forEach(function(btn){
       btn.addEventListener('click', function(){
         buttons.forEach(function(b){ b.classList.remove('is-active'); });
         btn.classList.add('is-active');
         var f = btn.getAttribute('data-filter');
-        cards.forEach(function(c){
-          var show = (f === 'all' || c.getAttribute('data-cat') === f);
-          c.style.display = show ? '' : 'none';
+        categories.forEach(function(cat){
+          var show = (f === 'all' || cat.getAttribute('data-cat') === f);
+          cat.style.display = show ? '' : 'none';
         });
       });
     });

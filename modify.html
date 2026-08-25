@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ปรับแต่ง | PPM Garage &amp; ECU Tuning</title>
+<meta name="description" content="บริการปรับแต่งรถมาสด้าจาก PPM Garage & ECU Tuning: ปรับตั้งช่วงล่าง แต่งรถ รีแฟลช ECU และอะไหล่แต่งรถ">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .svc-tabs{ background:var(--panel-2); border-bottom:1px solid var(--line); }
+  .svc-tabs-inner{ display:flex; gap:0; overflow-x:auto; }
+  .svc-tab{
+    display:flex; align-items:center; gap:14px; justify-content:center;
+    flex:1 1 0; min-width:170px;
+    padding:22px 20px;
+    border-right:1px solid var(--line);
+    white-space:nowrap;
+    color:var(--mute);
+    transition:background .2s var(--ease), color .2s var(--ease);
+  }
+  .svc-tab:last-child{ border-right:none; }
+  .svc-tab-icon{
+    width:38px; height:38px; flex:none; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line); background:var(--panel-1);
+    color:var(--red);
+    transition:border-color .2s, color .2s;
+  }
+  .svc-tab-icon img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .svc-tab-icon svg{ width:19px; height:19px; }
+  .svc-tab-text{ text-align:left; }
+  .svc-tab-text b{
+    display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em;
+    color:var(--red); margin-bottom:3px; transition:color .2s;
+  }
+  .svc-tab-text span{
+    font-family:var(--font-display); font-size:16px; letter-spacing:.02em; text-transform:uppercase; color:inherit;
+  }
+  .svc-tab:hover{ background:var(--panel-1); color:var(--white); }
+  .svc-tab.active{ background:var(--red); color:var(--white); }
+  .svc-tab.active .svc-tab-icon{ border-color:rgba(255,255,255,.45); color:var(--white); background:transparent; }
+  .svc-tab.active .svc-tab-text b{ color:rgba(255,255,255,.8); }
+  @media (max-width:760px){
+    .svc-tab{ flex:0 0 auto; min-width:150px; padding:16px 16px; gap:10px; }
+    .svc-tab-icon{ width:30px; height:30px; }
+    .svc-tab-icon svg{ width:16px; height:16px; }
+    .svc-tab-text span{ font-size:13px; }
+  }
+
+  .remap-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:28px; }
+  @media (max-width:640px){ .remap-grid{ grid-template-columns:1fr; } }
+  .remap-col{ background:var(--panel-1); padding:22px 24px; }
+  .remap-col h4{ font-size:16px; margin-bottom:14px; }
+  .remap-col ul{ display:grid; gap:10px; }
+  .remap-col li{ display:flex; gap:10px; font-size:13.5px; color:var(--white); align-items:flex-start; }
+
+  .svc-row{ display:grid; grid-template-columns:.9fr 1.1fr; gap:50px; align-items:start; }
+  @media (max-width:760px){ .svc-row{ grid-template-columns:1fr; gap:28px; } }
+
+  .parts-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:980px){ .parts-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .parts-grid{ grid-template-columns:1fr; } }
+
+  .pcard{ border:1px solid var(--line); background:var(--panel-2); display:flex; flex-direction:column; }
+  .pcard-media{ aspect-ratio:1/1; overflow:hidden; background:var(--panel-1); }
+  .pcard-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .pcard-body{ padding:22px 22px 24px; display:flex; flex-direction:column; flex:1; }
+  .pcard-fit{
+    align-self:flex-start; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--mute-dim); border:1px solid var(--line); padding:4px 10px; margin-bottom:12px;
+  }
+  .pcard-body h3{ font-size:18px; }
+  .pcard-desc{ margin-top:10px; font-size:13.5px; }
+  .pcard-benefits{ margin-top:16px; display:grid; gap:8px; }
+  .pcard-benefits li{ display:flex; gap:9px; align-items:flex-start; font-size:13px; color:var(--white); }
+  .pcard-benefits svg{ width:14px; height:14px; flex:none; margin-top:2px; color:var(--amber); }
+  .pcard-foot{ margin-top:20px; padding-top:18px; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .pcard-price{ font-family:var(--font-display); font-size:22px; color:var(--red); }
+  .pcard-price span{ font-family:var(--font-mono); font-size:11px; color:var(--mute-dim); display:block; letter-spacing:.05em; }
+
+  .pcard-variants{ margin-top:16px; display:grid; gap:0; border-top:1px solid var(--line); }
+  .pcard-variants li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:9px 0; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:12.5px;
+  }
+  .pcard-variants li span:first-child{ color:var(--mute); }
+  .pcard-variants li span:last-child{ color:var(--white); font-weight:600; }
+
+  .note-box{
+    border:1px dashed var(--line); padding:20px 22px; margin-bottom:40px;
+    display:flex; gap:14px; align-items:flex-start; background:var(--panel-2); font-size:13.5px;
+  }
+  .note-box svg{ width:20px; height:20px; flex:none; color:var(--amber); margin-top:2px; }
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="PPM Garage & ECU Tuning">
+      <span class="brand-text"><b>PPM GARAGE</b><span>&amp; ECU TUNING</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="maintenance.html">เช็คระยะ</a></li>
+      <li><a href="modify.html" class="active">ปรับแต่ง</a></li>
+      <li><a href="portfolio.html">ผลงาน</a></li>
+      <li><a href="articles.html">บทความ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <span class="nav-tel">โทร &nbsp;<b>087-025-9092</b></span>
+      <a href="contact.html" class="btn btn-primary">จองคิว</a>
+    </div>
+    <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;">
+    <div class="crumb"><b>ปรับแต่ง</b> / ช่วงล่าง ~ แต่งรถ ~ ECU Tuning ~ อะไหล่</div>
+    <div class="eyebrow">MODIFY &amp; TUNING</div>
+    <h1>ปรับแต่งมาสด้า<br>ให้ขับสนุกขึ้น</h1>
+    <p>ตั้งแต่ช่วงล่าง งานแต่งภายนอก ไปจนถึงจูนกล่อง ECU และอะไหล่แต่งรถ — เลือกดูรายละเอียดแต่ละหมวดด้านล่าง</p>
+  </div>
+</section>
+
+<!-- Quick jump — swap the SVG inside each .svc-tab-icon for <img src="assets/xxx.jpg"> once category photos come in -->
+<nav class="svc-tabs" aria-label="ไปยังหมวดปรับแต่ง">
+  <div class="wrap svc-tabs-inner">
+    <a href="#suspension" class="svc-tab" data-section="suspension">
+      <span class="svc-tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v3M12 19v3M8 5h8M8 19h8M9 7v3M15 7v3M9 14v3M15 14v3M9 10l3 2 3-2"/></svg>
+      </span>
+      <span class="svc-tab-text"><b>01</b><span>ช่วงล่าง</span></span>
+    </a>
+    <a href="#modify" class="svc-tab" data-section="modify">
+      <span class="svc-tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 11-5.4 5.4L5 16l3 3 4.3-4.3a4 4 0 015.4-5.4l-3 3-2-2z"/></svg>
+      </span>
+      <span class="svc-tab-text"><b>02</b><span>แต่งรถ</span></span>
+    </a>
+    <a href="#tuning" class="svc-tab" data-section="tuning">
+      <span class="svc-tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 12l4.2-4.2"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="svc-tab-text"><b>03</b><span>ECU Tuning</span></span>
+    </a>
+    <a href="#parts" class="svc-tab" data-section="parts">
+      <span class="svc-tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+      </span>
+      <span class="svc-tab-text"><b>04</b><span>อะไหล่</span></span>
+    </a>
+  </div>
+</nav>
+
+<section id="suspension">
+  <div class="wrap">
+    <div class="reveal svc-row">
+      <div>
+        <span class="card-num" style="font-size:14px;">01 / 04</span>
+        <h2 class="section-title mt-0" style="margin-top:14px;">ปรับตั้งช่วงล่าง</h2>
+        <p style="margin-top:18px; font-size:15.5px;">
+          ตั้งมุมล้อและปรับช่วงล่างให้เข้ากับสไตล์การขับของแต่ละคน ไม่ว่าจะเน้นความนุ่มนวลในเมือง
+          หรือความมั่นใจตอนเข้าโค้ง พร้อมช่วยแก้อาการดึง สั่น หรือเข้าโค้งไม่นิ่ง
+        </p>
+        <div class="tag-row" style="margin-top:22px;">
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">Wheel Alignment</span>
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">Suspension Setup</span>
+        </div>
+      </div>
+      <div class="card clip-card reveal" style="background:var(--panel-2); border:1px solid var(--line);">
+        <h4 style="font-size:15px; font-family:var(--font-mono); color:var(--mute-dim); letter-spacing:.1em; text-transform:uppercase; margin-bottom:18px;">สิ่งที่ได้รับ</h4>
+        <ul style="display:grid; gap:14px;">
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ตั้งมุมล้อ (โท / แคมเบอร์) ให้เข้ากับสไตล์การขับ</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ปรับตั้งหรือเปลี่ยนโช้คอัพตามงบและการใช้งาน</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ช่วยวินิจฉัยอาการดึง สั่น หรือเข้าโค้งไม่นิ่ง</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ทดลองขับตรวจสอบความเรียบร้อยก่อนส่งมอบ</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modify" style="border-top:1px solid var(--line); background:var(--panel-2);">
+  <div class="wrap">
+    <div class="reveal svc-row">
+      <div>
+        <span class="card-num" style="font-size:14px;">02 / 04</span>
+        <h2 class="section-title mt-0" style="margin-top:14px;">แต่งรถ &amp; โมดิฟาย</h2>
+        <p style="margin-top:18px; font-size:15.5px;">
+          ติดตั้งอุปกรณ์แต่งภายนอกและชิ้นส่วนสมรรถนะ ตั้งแต่เฮดเดอร์ ท่อไอเสีย ลิ้นขยาย ไปจนถึงสปอยเลอร์
+          พร้อมให้คำปรึกษาเลือกพาร์ทที่เข้ากับรุ่นรถและการใช้งานจริง
+        </p>
+        <div class="tag-row" style="margin-top:22px;">
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">Exterior</span>
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">Performance Parts</span>
+        </div>
+      </div>
+      <div class="card clip-card reveal" style="background:var(--panel-1); border:1px solid var(--line);">
+        <h4 style="font-size:15px; font-family:var(--font-mono); color:var(--mute-dim); letter-spacing:.1em; text-transform:uppercase; margin-bottom:18px;">สิ่งที่ได้รับ</h4>
+        <ul style="display:grid; gap:14px;">
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--amber);"></span></span><p style="color:var(--white);">ติดตั้งเฮดเดอร์ ท่อไอเสีย และลิ้นขยาย</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--amber);"></span></span><p style="color:var(--white);">ติดตั้งสปอยเลอร์และชุดแต่งภายนอก</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--amber);"></span></span><p style="color:var(--white);">ให้คำปรึกษาเรื่องพาร์ทที่เข้ากับรุ่นรถ</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--amber);"></span></span><p style="color:var(--white);">ตรวจเช็คความเรียบร้อยหลังติดตั้งทุกครั้ง</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tuning">
+  <div class="wrap">
+    <div class="reveal svc-row">
+      <div>
+        <span class="card-num" style="font-size:14px;">03 / 04</span>
+        <h2 class="section-title mt-0" style="margin-top:14px;">ECU Reflash &amp; Tuning</h2>
+        <p style="margin-top:18px; font-size:15.5px;">
+          ปรับแผนที่การทำงานของกล่อง ECU ให้เหมาะกับสภาพเครื่องยนต์และอุปกรณ์ที่ติดตั้งเพิ่มในรถแต่ละคัน
+          เน้นความสมูทของการขับขี่ควบคู่ไปกับแรงม้า-แรงบิดที่เพิ่มขึ้น รองรับทั้งรถป้ายแดงและรถที่ผ่านการแต่งเครื่องมาแล้ว
+        </p>
+        <div class="tag-row" style="margin-top:22px;">
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">Stage Tune</span>
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">รถป้ายแดง</span>
+          <span class="eyebrow" style="color:var(--white); border:1px solid var(--line); padding:6px 12px;">รถแต่งเครื่อง</span>
+        </div>
+      </div>
+      <div class="card clip-card reveal" style="background:var(--panel-2); border:1px solid var(--line);">
+        <h4 style="font-size:15px; font-family:var(--font-mono); color:var(--mute-dim); letter-spacing:.1em; text-transform:uppercase; margin-bottom:18px;">สิ่งที่ได้รับ</h4>
+        <ul style="display:grid; gap:14px;">
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ปรับแผนที่ ECU ให้เหมาะกับสภาพเครื่องยนต์และอุปกรณ์ที่ติดตั้งเพิ่ม</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">รองรับรถป้ายแดงและรถที่ผ่านการแต่งเครื่องมาแล้ว</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ตรวจสอบค่าการทำงานหลังจูนก่อนส่งมอบรถทุกครั้ง</p></li>
+          <li style="display:flex; gap:12px;"><span class="slashmark"><span class="slash" style="background:var(--red);"></span></span><p style="color:var(--white);">ให้คำแนะนำการดูแลรถหลังจูนอย่างละเอียด</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:56px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+        <div>
+          <span class="eyebrow">ตัวอย่างผลการวัดจริง</span>
+          <h3 style="font-size:22px; margin-top:10px;">ผลการจูนบนไดโน่ (Dyno Results)</h3>
+        </div>
+        <p style="max-width:380px; font-size:13px;">ตัวเลขวัดจากไดโน่จริงที่หน้าร้าน หน่วยเป็นแรงม้าที่วัดได้ที่ล้อ (WHP) ผลลัพธ์แต่ละคันอาจต่างกันตามรุ่น สภาพเครื่องยนต์ และชนิดเชื้อเพลิง</p>
+      </div>
+
+      <div style="overflow-x:auto; border:1px solid var(--line);">
+        <table style="width:100%; border-collapse:collapse; min-width:640px;">
+          <thead>
+            <tr style="background:var(--panel-1);">
+              <th style="text-align:left; padding:14px 18px; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute-dim); border-bottom:1px solid var(--line);">รุ่นรถ</th>
+              <th style="text-align:left; padding:14px 18px; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute-dim); border-bottom:1px solid var(--line);">เชื้อเพลิง</th>
+              <th style="text-align:left; padding:14px 18px; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute-dim); border-bottom:1px solid var(--line);">ก่อนจูน</th>
+              <th style="text-align:left; padding:14px 18px; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); border-bottom:1px solid var(--line);">หลังจูน</th>
+            </tr>
+          </thead>
+          <tbody style="font-family:var(--font-mono); font-size:13.5px;">
+            <tr>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--white);">Mazda 2 1.3</td>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--mute);">E20</td>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--mute);">80.7 PS / 109.7 Nm</td>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--red); font-weight:600;">90 WHP / 117 Nm</td>
+            </tr>
+            <tr>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--white);">Mazda 2 1.3</td>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--mute);">E20</td>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--mute);">78.8 PS / 109.9 Nm</td>
+              <td style="padding:16px 18px; border-bottom:1px solid var(--line); color:var(--red); font-weight:600;">86 WHP / 116 Nm</td>
+            </tr>
+            <tr>
+              <td style="padding:16px 18px; color:var(--white);">Mazda 3 BN</td>
+              <td style="padding:16px 18px; color:var(--mute);">E85</td>
+              <td style="padding:16px 18px; color:var(--mute-dim);">ไม่มีข้อมูลก่อนจูน</td>
+              <td style="padding:16px 18px; color:var(--red); font-weight:600;">182 WHP / 225 Nm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parts" style="border-top:1px solid var(--line); background:var(--panel-2);">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:32px;">
+      <span class="card-num" style="font-size:14px;">04 / 04</span>
+      <h2 class="section-title mt-0" style="margin-top:14px;">อะไหล่แต่งรถ</h2>
+      <p style="margin-top:18px; font-size:15.5px; max-width:680px;">ชิ้นส่วนที่ลองติดตั้งและทดสอบบนไดโน่มาก่อน มีทั้งของมาสด้าและยี่ห้ออื่น</p>
+    </div>
+    <div class="note-box reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p>สินค้าในหมวดนี้ไม่จำกัดเฉพาะรถมาสด้า — ใส่ได้กับรถยี่ห้ออื่นตามที่ระบุความเข้ากันได้ของแต่ละชิ้น สอบถามรุ่นรถของคุณก่อนสั่งซื้อได้ทางโทรศัพท์หรือไลน์</p>
+    </div>
+
+    <div class="parts-grid">
+
+      <div class="pcard reveal">
+        <div class="pcard-media">
+          <img src="assets/product-throttle-spacer-yaris.jpg" alt="สเปเซอร์รองลิ้นปีกผีเสื้อ Throttle Body Spacer PPM Garage">
+        </div>
+        <div class="pcard-body">
+          <span class="pcard-fit">Mazda &amp; Toyota Yaris</span>
+          <h3>สเปเซอร์รองลิ้นปีกผีเสื้อ</h3>
+          <p class="pcard-desc">Throttle Body Spacer ติดตั้งระหว่างท่อร่วมไอดีกับลิ้นปีกผีเสื้อ ช่วยเพิ่มปริมาตรท่อร่วมไอดี ให้อากาศไหลเข้าห้องเผาไหม้ได้ดีขึ้น</p>
+          <ul class="pcard-benefits">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>เพิ่มแรงม้า</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>เพิ่มแรงบิด</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>ลดอาการรอรอบ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>ลดอาการกระตุกรอบต่ำ</li>
+          </ul>
+          <ul class="pcard-variants">
+            <li><span>Mazda 1.3</span><span>฿1,690</span></li>
+            <li><span>Mazda 2.0–2.5</span><span>฿1,990</span></li>
+            <li><span>ท่อแดง</span><span>฿1,500</span></li>
+            <li><span>Toyota Yaris</span><span>฿1,690</span></li>
+          </ul>
+          <div class="pcard-foot">
+            <div class="pcard-price" style="font-size:14px; color:var(--mute-dim); font-family:var(--font-mono);">ราคาต่อชิ้นตามรุ่นด้านบน</div>
+            <a href="contact.html" class="btn btn-ghost" style="padding:11px 18px; font-size:12.5px;">สอบถาม</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pcard-media">
+          <img src="assets/product-skidplate.jpg" alt="แผ่นเสริมใต้ท้องรถกันกระแทกและระบายความร้อน อลูมิเนียมหนา 2.0 มม. PPM Garage">
+        </div>
+        <div class="pcard-body">
+          <span class="pcard-fit">สอบถามรุ่นรถที่ใส่ได้</span>
+          <h3>แผ่นเสริมใต้ท้องรถ</h3>
+          <p class="pcard-desc">แผ่นอลูมิเนียมเต็มแผ่น หนา 2.0 มม. ติดตั้งใต้ท้องรถช่วงห้องเครื่อง กันกระแทกจากหินดีดและช่วยระบายความร้อนออกจากห้องเครื่อง</p>
+          <ul class="pcard-benefits">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>ป้องกันหินดีด/กระแทกใต้รถ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>ช่วยดูดอากาศร้อนออกจากห้องเครื่อง</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>อลูมิเนียมหนา 2.0 มม. แข็งแรง</li>
+          </ul>
+          <div class="pcard-foot">
+            <div class="pcard-price" style="font-size:14px; color:var(--mute-dim); font-family:var(--font-mono);">สอบถามราคา</div>
+            <a href="contact.html" class="btn btn-ghost" style="padding:11px 18px; font-size:12.5px;">สอบถาม</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap cta-inner">
+    <h2>อยากปรับแต่งจุดไหน คุยกับทีมงานได้เลย</h2>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-ghost">ติดต่อร้าน</a>
+      <a href="tel:0870259092" class="btn" style="background:#161300; color:var(--white);">โทร 087-025-9092</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand" style="margin-bottom:16px;">
+          <img src="assets/logo.png" alt="PPM Garage & ECU Tuning" style="height:38px;">
+        </a>
+        <p style="max-width:320px;">อู่มาสด้าที่นนทบุรี รับเช็คระยะ ปรับจูน ECU ปรับตั้งช่วงล่าง และแต่งรถ</p>
+      </div>
+      <div>
+        <h5>เมนู</h5>
+        <a href="index.html">หน้าแรก</a>
+        <a href="maintenance.html">เช็คระยะ</a>
+        <a href="modify.html">ปรับแต่ง</a>
+        <a href="portfolio.html">ผลงาน</a>
+        <a href="articles.html">บทความ</a>
+        <a href="contact.html">ติดต่อ</a>
+      </div>
+      <div>
+        <h5>ติดต่อร้าน</h5>
+        <a href="tel:0870259092">087-025-9092</a>
+        <a href="https://www.facebook.com/PPMGarageAndEcuTuning/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/ppm.garage/" target="_blank" rel="noopener">Instagram @ppm.garage</a>
+        <p>แถวสะพานพระราม 5 นนทบุรี</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-year></span> PPM Garage &amp; ECU Tuning</span>
+      <span>MAZDA GARAGE — NONTHABURI, THAILAND</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  // Highlight the active sub-tab based on scroll position
+  document.addEventListener('DOMContentLoaded', function(){
+    var tabs = document.querySelectorAll('.svc-tab');
+    var sections = ['suspension','modify','tuning','parts']
+      .map(function(id){ return document.getElementById(id); })
+      .filter(Boolean);
+
+    function setActive(id){
+      tabs.forEach(function(t){
+        t.classList.toggle('active', t.getAttribute('data-section') === id);
+      });
+    }
+
+    if('IntersectionObserver' in window && sections.length){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ setActive(entry.target.id); }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function(s){ io.observe(s); });
+    }
+
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){ setActive(t.getAttribute('data-section')); });
+    });
+  });
+</script>
+</body>
+</html>

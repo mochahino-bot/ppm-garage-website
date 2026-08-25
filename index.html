@@ -7,6 +7,36 @@
 <meta name="description" content="PPM Garage &amp; ECU Tuning อู่มาสด้าที่นนทบุรี รับเช็คระยะ จูน ECU ปรับตั้งช่วงล่าง และแต่งรถ">
 <link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+  .teaser-grid{ display:flex; flex-wrap:wrap; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .teaser-card{
+    display:block; flex:1 1 360px;
+    background:var(--panel-2); padding:40px 36px; position:relative; overflow:hidden;
+    transition:background .25s var(--ease);
+  }
+  .teaser-card:hover{ background:var(--panel-1); }
+  .teaser-icon{
+    width:52px; height:52px; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line); color:var(--red); margin-bottom:22px;
+  }
+  .teaser-icon svg{ width:26px; height:26px; }
+  .teaser-card h3{ font-size:26px; }
+  .teaser-card p{ margin-top:12px; font-size:14.5px; max-width:400px; }
+  .teaser-link{
+    margin-top:22px; display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-size:12.5px; color:var(--white); letter-spacing:.03em;
+  }
+  .teaser-link svg{ width:14px; height:14px; transition:transform .2s; }
+  .teaser-card:hover .teaser-link svg{ transform:translate(3px,-3px); }
+
+  .highlight-strip{ display:flex; flex-wrap:wrap; gap:18px; }
+  .highlight-item{ display:block; flex:1 1 280px; border:1px solid var(--line); overflow:hidden; background:var(--panel-2); }
+  .highlight-item img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .4s var(--ease); }
+  .highlight-item:hover img{ transform:scale(1.05); }
+  .highlight-item-body{ padding:14px 16px; }
+  .highlight-item-body span{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; color:var(--amber); text-transform:uppercase; }
+  .highlight-item-body h4{ font-size:14.5px; margin-top:6px; }
+</style>
 </head>
 <body>
 
@@ -17,11 +47,10 @@
       <span class="brand-text"><b>PPM GARAGE</b><span>&amp; ECU TUNING</span></span>
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">หน้าแรก</a></li>
-      <li><a href="services.html">บริการ</a></li>
+      <li><a href="maintenance.html">เช็คระยะ</a></li>
+      <li><a href="modify.html">ปรับแต่ง</a></li>
       <li><a href="portfolio.html">ผลงาน</a></li>
-      <li><a href="parts.html">อะไหล่แต่งรถ</a></li>
-      <li><a href="contact.html">ติดต่อ</a></li>
+      <li><a href="articles.html">บทความ</a></li>
     </ul>
     <div class="nav-cta">
       <span class="nav-tel">โทร &nbsp;<b>087-025-9092</b></span>
@@ -49,7 +78,7 @@
       </p>
       <div class="hero-actions">
         <a href="contact.html" class="btn btn-primary">นัดคิวเข้าอู่</a>
-        <a href="services.html" class="btn btn-ghost">ดูบริการทั้งหมด</a>
+        <a href="maintenance.html" class="btn btn-ghost">ดูบริการทั้งหมด</a>
       </div>
     </div>
 
@@ -65,7 +94,7 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span>ตรวจเช็คช่วงล่าง</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span>เปลี่ยนกรองอากาศ / แอร์</span></li>
       </ul>
-      <a href="services.html#maintenance" class="hero-checklist-link">ดูราคาทั้งหมด
+      <a href="maintenance.html" class="hero-checklist-link">ดูราคาทั้งหมด
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
       </a>
     </div>
@@ -76,7 +105,7 @@
   <div class="wrap">
     <div class="stat"><b>MAZDA</b><span>ทำเฉพาะมาสด้า ไม่รับยี่ห้ออื่น</span></div>
     <div class="stat"><b>เช็คระยะ</b><span>ตรวจตามรอบ ไม่ต้องรอให้เสียก่อน</span></div>
-    <div class="stat"><b>ช่วงล่าง</b><span>ตั้งค่าตามสไตล์การขับของแต่ละคน</span></div>
+    <div class="stat"><b>ปรับแต่ง</b><span>ช่วงล่าง แต่งรถ และจูน ECU</span></div>
     <div class="stat"><b>นนทบุรี</b><span>นัดคิวผ่านโทร / ไลน์ / เพจร้าน</span></div>
   </div>
 </div>
@@ -86,74 +115,68 @@
     <div class="section-head reveal">
       <div>
         <div class="eyebrow">สิ่งที่เราทำ</div>
-        <h2 class="section-title">4 กลุ่มบริการหลัก สำหรับคนใช้มาสด้า</h2>
+        <h2 class="section-title">ดูแลมาสด้า 2 ด้านหลัก</h2>
       </div>
-      <p class="section-desc">ทุกบริการโฟกัสที่รถมาสด้าโดยเฉพาะ ช่วยให้วางแผนงานและเลือกค่าที่เหมาะกับรุ่นรถได้ตรงจุดขึ้น</p>
+      <p class="section-desc">แยกให้ชัดว่าอยากดูแลรถประจำวัน หรืออยากปรับแต่งเพิ่มเติม</p>
     </div>
 
-    <div class="grid-4">
-      <div class="card reveal">
-        <span class="card-num">01</span>
+    <div class="teaser-grid">
+      <a href="maintenance.html" class="teaser-card reveal">
+        <div class="teaser-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s-5 5.5-5 9.5a5 5 0 0010 0C17 8.5 12 3 12 3z"/></svg>
+        </div>
         <h3>เช็คระยะ &amp; บำรุงรักษา</h3>
-        <p>เช็คระยะตามรอบ เปลี่ยนถ่ายของเหลว ตรวจเครื่องยนต์และระบบแอร์ พร้อมบันทึกประวัติการเข้าศูนย์</p>
-        <div class="card-tags"><span>Routine Service</span><span>สมุดบันทึก</span></div>
-        <a href="services.html#maintenance" class="card-link">ดูรายละเอียด <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-      <div class="card reveal">
-        <span class="card-num">02</span>
-        <h3>ปรับตั้งช่วงล่าง</h3>
-        <p>ตั้งมุมล้อ ปรับโช้คและช่วงล่างให้เข้าโค้งนิ่งขึ้น เลือกโทนได้ทั้งสายสบายและสายซิ่ง</p>
-        <div class="card-tags"><span>Alignment</span><span>Suspension</span></div>
-        <a href="services.html#suspension" class="card-link">ดูรายละเอียด <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-      <div class="card reveal">
-        <span class="card-num">03</span>
-        <h3>แต่งรถ &amp; โมดิฟาย</h3>
-        <p>เฮดเดอร์ ลิ้นขยาย สปอยเลอร์ และอุปกรณ์แต่งอื่นๆ ติดตั้งพร้อมตรวจเช็คความเรียบร้อยหลังใส่</p>
-        <div class="card-tags"><span>Exterior</span><span>Performance Parts</span></div>
-        <a href="services.html#modify" class="card-link">ดูรายละเอียด <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-      <div class="card reveal">
-        <span class="card-num">04</span>
-        <h3>ECU Reflash &amp; Tuning</h3>
-        <p>ปรับจูนกล่อง ECU เฉพาะรถมาสด้า เก็บบุคลิกการขับเดิมไว้ พร้อมเพิ่มแรงม้า-แรงบิดให้สมูทขึ้น</p>
-        <div class="card-tags"><span>Stage Tune</span><span>ป้ายแดง</span></div>
-        <a href="services.html#tuning" class="card-link">ดูรายละเอียด <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
+        <p>เปลี่ยนถ่ายน้ำมันเครื่อง น้ำมันเกียร์ ผ้าเบรก และตรวจเช็คตามรอบการใช้งาน พร้อมราคาเบื้องต้นครบทุกรายการ</p>
+        <span class="teaser-link">ดูรายการและราคา <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+      </a>
+      <a href="modify.html" class="teaser-card reveal">
+        <div class="teaser-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 11-5.4 5.4L5 16l3 3 4.3-4.3a4 4 0 015.4-5.4l-3 3-2-2z"/></svg>
+        </div>
+        <h3>ปรับแต่ง &amp; ECU Tuning</h3>
+        <p>ปรับตั้งช่วงล่าง แต่งรถภายนอก รีแฟลชกล่อง ECU และอะไหล่แต่งรถ สำหรับคนที่อยากได้มากกว่าเดิม</p>
+        <span class="teaser-link">ดูรายละเอียด <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
 
-<section id="process" style="border-top:1px solid var(--line); background:var(--panel-2);">
+<section id="highlight" style="border-top:1px solid var(--line); background:var(--panel-2);">
   <div class="wrap">
     <div class="section-head reveal">
       <div>
-        <div class="eyebrow">ขั้นตอนการทำงาน</div>
-        <h2 class="section-title">จากนัดคิว ถึงส่งมอบรถ</h2>
+        <div class="eyebrow">ผลงานที่ผ่านมา</div>
+        <h2 class="section-title">รถที่เคยผ่านมือทีม PPM</h2>
       </div>
-      <p class="section-desc">ทุกคันผ่านขั้นตอนเดียวกัน เพื่อให้งานที่ออกมาตรงกับที่คุยกันไว้</p>
+      <p class="section-desc">ตัวอย่างงานเช็คระยะ ปรับช่วงล่าง แต่งรถ และจูน ECU</p>
     </div>
-    <div class="steps">
-      <div class="step reveal">
-        <em>ขั้นตอน 01</em>
-        <h4>รับรถ &amp; คุยความต้องการ</h4>
-        <p>ฟังอาการ/เป้าหมาย ไม่ว่าจะเป็นเช็คระยะ จูน หรือแต่งรถ</p>
-      </div>
-      <div class="step reveal">
-        <em>ขั้นตอน 02</em>
-        <h4>ตรวจเช็ค &amp; วางแผนงาน</h4>
-        <p>ตรวจสภาพรถจริง แจ้งค่าใช้จ่ายและระยะเวลาก่อนเริ่มงาน</p>
-      </div>
-      <div class="step reveal">
-        <em>ขั้นตอน 03</em>
-        <h4>ลงมือทำ</h4>
-        <p>ซ่อม/จูน/ติดตั้งอุปกรณ์ ตามแผนที่ตกลงกันไว้</p>
-      </div>
-      <div class="step reveal">
-        <em>ขั้นตอน 04</em>
-        <h4>ทดสอบ &amp; ส่งมอบ</h4>
-        <p>ทดลองขับตรวจสอบความเรียบร้อยก่อนส่งคืนลูกค้า</p>
-      </div>
+
+    <div class="highlight-strip">
+      <a href="portfolio.html" class="highlight-item reveal">
+        <img src="assets/work-mazda3bn-182whp.jpg" alt="Mazda 3 BN รีแมพ E85 ที่ PPM Garage">
+        <div class="highlight-item-body">
+          <span>ECU TUNING</span>
+          <h4>Mazda 3 BN — Remap E85</h4>
+        </div>
+      </a>
+      <a href="portfolio.html" class="highlight-item reveal">
+        <img src="assets/work-mazda2-white-90whp.jpg" alt="Mazda 2 1.3 รีแมพ E20 ที่ PPM Garage">
+        <div class="highlight-item-body">
+          <span>ECU TUNING</span>
+          <h4>Mazda 2 1.3 — Remap E20</h4>
+        </div>
+      </a>
+      <a href="portfolio.html" class="highlight-item reveal">
+        <img src="assets/work-mazda2-red-86whp.jpg" alt="Mazda 2 1.3 สีแดง รีแมพ E20 ที่ PPM Garage">
+        <div class="highlight-item-body">
+          <span>ECU TUNING</span>
+          <h4>Mazda 2 1.3 — Remap E20</h4>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align:center; margin-top:34px;">
+      <a href="portfolio.html" class="btn btn-ghost">ดูผลงานทั้งหมด</a>
     </div>
   </div>
 </section>
@@ -180,9 +203,10 @@
       <div>
         <h5>เมนู</h5>
         <a href="index.html">หน้าแรก</a>
-        <a href="services.html">บริการ</a>
+        <a href="maintenance.html">เช็คระยะ</a>
+        <a href="modify.html">ปรับแต่ง</a>
         <a href="portfolio.html">ผลงาน</a>
-        <a href="parts.html">อะไหล่แต่งรถ</a>
+        <a href="articles.html">บทความ</a>
         <a href="contact.html">ติดต่อ</a>
       </div>
       <div>
